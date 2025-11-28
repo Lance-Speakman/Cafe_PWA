@@ -1,0 +1,393 @@
+
+/* =====================================================
+
+   HOME PAGE STYLES
+
+   ===================================================== */
+                 
+/* ---------- Base Styles and Colours ---------- */
+:root {
+  --brand: #B43F3F;   /* teal brand accent */
+  --accent: #DBD56E;  /* coffee tone */
+  --bg: #faf7f2;      /* soft cream background */
+  --ink: #1a1a1a;     /* main text colour */
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+img { max-width: 100%; display: block; }
+a { color: var(--brand); text-decoration: none; transition: color 0.2s ease; }
+a:hover { text-decoration: underline; }
+
+.container { width: min(1100px, 92%); margin-inline: auto; }
+
+/* Remove default list spacing (helps with nav layout) */
+ul { margin: 0; padding: 0; }
+
+/* ---------- Header and Navigation ---------- */
+.site-header {
+  background:#faf7f2;
+  border-bottom:1px solid #eee;
+}
+
+.header-inner {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:.75rem 0;
+}
+
+.brand {
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+  cursor:default;
+}
+
+.logo { height:52px; width:auto; }
+
+.brand-name {
+  font-weight:800;
+  color:var(--ink);                      /* dark text */
+  font-size:clamp(1.1rem,2.6vw,1.6rem);  /* responsive size */
+  letter-spacing:.2px;
+}
+
+/* Navigation list */
+.nav-list {
+  list-style:none;
+  display:flex;
+  gap:1rem;
+  margin:0;
+  padding:0;
+}
+
+/* Plain links with light-coffee hover pill */
+.nav-list a {
+  display:inline-block;
+  padding:.5rem 1rem;
+  border-radius:999px;
+  background:transparent;
+  color:#2D93AD;
+  text-decoration:none;
+  font-weight:600;
+  transition:background .18s ease,color .18s ease;
+}
+
+.nav-list a:hover {
+  background:#2D93AD;   /* light coffee */
+  color:var(--ink);
+  text-decoration:none; /* remove underline on hover */
+}
+
+/* ---------- Hero Section ---------- */
+/* Full-width hero image with text overlay */
+.hero {
+  position: relative;
+  isolation: isolate; /* keeps overlay layers separate */
+}
+
+.hero img {
+  display: block;
+  width: 100%;
+  height: clamp(240px, 38vw, 520px);
+  object-fit: cover; /* fills & crops image without distortion */
+}
+
+/* Text box positioned over the image */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;   /* left-align text */
+  justify-content: flex-end; /* anchor text at bottom */
+  gap: 6px;
+  padding: clamp(12px, 4vw, 28px);
+  color: #fff;               /* white text for contrast */
+}
+
+/* Adds a subtle gradient layer across the entire hero image */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;  /* covers the entire hero area */
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.10) 0%,   /* lighter at the top */
+    rgba(0, 0, 0, 0.20) 40%,  /* gentle midtone fade */
+    rgba(0, 0, 0, 0.36) 100%  /* slightly darker at the bottom for contrast */
+  );
+  pointer-events: none;  /* allows clicks to pass through */
+  z-index: 0;            /* sits behind the text but above the image */
+}
+
+/* Ensures the text overlay sits above the new gradient layer */
+.hero-overlay {
+  z-index: 1;
+}
+
+.hero-overlay h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+}
+
+.hero-overlay .lead {
+  margin: 0;
+  opacity: 0.95;
+}
+
+/* ---------- Tagline Section ---------- */
+/* Centered tagline beneath the hero image */
+.tagline h2 {
+  margin: clamp(12px, 2.5vw, 20px) 0;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ---------- Cards Section (Grid) ---------- */
+.cards { padding: 2rem 0; }
+
+/* 2 columns on wide screens, stacks automatically on small screens */
+.grid{
+  display:grid;
+  gap:1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.card{
+  background:#fff;
+  border:1px solid #eee;
+  border-radius:16px;
+  box-shadow:0 8px 24px rgba(0,0,0,.08);
+  padding:1.25rem clamp(1rem, 3vw, 1.75rem);
+}
+
+/* card headings match the reference weight/size */
+.card h2{ margin:.25rem 0 1rem 0; font-size:1.6rem; font-weight:800; }
+
+/* Hours table styling (lines between rows, tidy columns) */
+.hours{ width:100%; border-collapse:collapse; }
+.hours th, .hours td{
+  border-bottom:1px solid #e9e7e3;
+  padding:12px 0;
+  text-align:left;
+}
+.hours th{ width:44%; white-space:nowrap; font-weight:700; color:#464E47; }
+.hours tr:last-child th, .hours tr:last-child td{ border-bottom:0; }
+
+/* link + small note text inside cards */
+.card a{ color:#2a66c7; text-decoration:underline; }
+.card .note{ color:#464E47; margin-top:.5rem; }
+
+/* ---------- Footer Section ---------- */
+.site-footer {
+  border-top: 1px solid #ccc7be;  /* slightly darker neutral border */
+  color: #464E47;
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 1rem 0;
+  margin-top: 1rem;
+}
+
+.site-footer a {
+  color: var(--brand);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Responsive Adjustments ---------- */
+
+/* Tablets and small laptops */
+@media (max-width: 900px){
+  .header-inner{ flex-wrap: wrap; gap: .5rem; }
+  .tagline h2{ margin: 12px 0; }
+  /* Grid from Step 5 already auto-stacks via auto-fit/minmax */
+}
+
+/* Phones */
+@media (max-width: 520px){
+  .brand .logo{ height: 30px; }
+  .brand-name{ font-size: clamp(1rem, 5vw, 1.25rem); }
+  .nav-list{ gap: .5rem; }
+
+  /* Hero tweaks: comfortable height + padding on small screens */
+  .hero img{ height: clamp(220px, 52vw, 360px); }
+  .hero-overlay{ padding: 16px; }
+}
+
+/* =====================================================
+   MENU PAGE STYLES
+   ===================================================== */
+
+/* ---------- Menu Banner ---------- */
+.menu-banner img {
+  width: 100%;
+  height: clamp(180px, 22vw, 360px); /* thin on phones, not too deep on desktops */
+  object-fit: cover;                 /* fills area without distortion */
+  object-position: center 45%;       /* centers focus */
+  display: block;
+}
+
+/* ---------- Banner Text (no overlay background) ---------- */
+.menu-banner {
+  position: relative;
+  text-align: center;
+  color: #fff;
+}
+
+.banner-text {
+  position: absolute;
+  top: 75%; /* text 75% from top of banner*/
+  left: 50%; /* text centred on page*/
+  transform: translate(-50%, -50%);
+}
+
+.banner-text h1 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  margin: 0;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+}
+
+.banner-text .lead {
+  font-size: clamp(1rem, 1.4vw, 1.3rem);
+  margin-top: 0.5rem;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+}
+
+/* ---------- Menu Section Spacing ---------- */
+.menu-section {
+  margin-top: clamp(16px, 3vw, 28px);   /* space between banner and card */
+}
+
+/* ---------- Centred Menu Card ---------- */
+.menu-card {
+  max-width: 1040px;                    /* controls overall card width */
+  margin: clamp(12px, 2.5vw, 22px) auto;
+  background: #fff;
+  border-radius: 20px;
+  padding: clamp(16px, 3vw, 28px);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.08),
+    0 1px 0 rgba(0, 0, 0, 0.05) inset;  /* soft lifted effect */
+}
+
+/* ---------- Menu Headings ---------- */
+.menu-card h2 {
+  margin: 0 0 14px 0;
+  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+}
+
+/* ---------- Menu Item Layout ---------- */
+.menu-item {
+  display: flex;
+  gap: clamp(12px, 2vw, 20px);
+  align-items: center;
+  padding: clamp(10px, 2vw, 16px);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.05);
+  transition: transform 0.25s ease;
+}
+
+/* Space between multiple items */
+.menu-item + .menu-item {
+  margin-top: clamp(10px, 2vw, 16px);
+}
+
+/* ---------- Menu Image ---------- */
+.menu-thumb {
+  width: 160px;
+  height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f3f2ef;
+  flex: 0 0 160px;
+}
+.menu-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---------- Menu Text ---------- */
+.menu-info {
+  flex: 1 1 auto;
+}
+.menu-info h3 {
+  margin: 0 0 6px 0;
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+}
+.menu-info .desc {
+  margin: 0 0 8px 0;
+  color: #464E47;
+}
+
+/* ---------- Price and Add Button ---------- */
+.menu-actions {
+  display: flex;
+  justify-content: space-between;       /* price left, button right */
+  align-items: center;
+  gap: 0.75rem;
+}
+.price {
+  font-weight: 700;
+  color: #B43F3F;
+}
+
+/* ---------- Add Button Styling ---------- */
+.add-btn {
+  border: 1px solid #B43F3F;
+  background: #B43F3F;
+  color: #fff;
+  padding: 0.45rem 0.9rem;
+  border-radius: 10px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: not-allowed;
+  opacity: 0.95;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
+  transition: opacity 0.2s ease;
+}
+.add-btn:hover {
+  opacity: 1;
+}
+
+/* ---------- Responsive Layout ---------- */
+@media (max-width: 720px) {
+  .menu-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .menu-thumb {
+    width: 100%;
+    height: 200px;
+    flex-basis: 200px;
+  }
+  .menu-actions {
+    margin-top: 6px;
+  }
+}
+
+/* ---------- Image Zoom on Hover ---------- */
+/* Adds a smooth zoom effect when the user hovers over a menu image */
+.menu-thumb img {
+  transition: transform 0.25s ease;   /* controls speed and smoothness */
+}
+
+.menu-thumb:hover img {
+  transform: scale(1.06);             /* enlarges image slightly on hover */
+}
+
