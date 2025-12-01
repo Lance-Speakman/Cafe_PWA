@@ -65,11 +65,54 @@
             </article>
         </section>
     </main>
+
+    <section class="container" style="text-align: center; margin-top: 1.5rem;">
+        <h2>Tell us what you think</h2>
+        <p class="note">This form sends your message to the Flask server.</p>
+
+        <form id="feedback-form" style="max-width: 400px; margin: 0 auto;">
+            <textarea id="feedback-message" name="feedback" rows="3" required></textarea><br>
+            <button type="submit" class="add-btn">Send feedback</button>
+        </form>
+
+        <p id="feedback-response" class="note" style="margin-top: 0.5rem;"></p>
+    </section>
+
     <!-- ---------- Footer Section ---------- -->
     <footer class="site-footer">
         <div class="container">
             © 2025 Café Finigan • <a href="#">Privacy</a>
         </div>
     </footer>
+
+    <!-- ---------- Script: Send form data to Flask and display response ---------- -->
+    <script>
+        const form = document.getElementById('feedback-form');
+        const textarea = document.getElementById('feedback-message');
+        const output = document.getElementById('feedback-response');
+
+        // Handle form submission
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Stop page reload
+
+        const message = textarea.value.trim();
+
+        // Send message to Flask using fetch()
+        fetch("http://127.0.0.1:5050/feedback", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message })
+        })
+            .then(res => res.json())
+            .then(data => {
+            // Show Flask's reply
+                output.textContent = data.response || data.error;
+                textarea.value = ""; // Clear form after sending
+            })
+            .catch(() => {
+                output.textContent = "Could not reach the server. Is Flask running?";
+            });
+        });
+    </script>
 </body>
 </html>

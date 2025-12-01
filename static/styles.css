@@ -361,8 +361,13 @@ ul { margin: 0; padding: 0; }
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
   transition: opacity 0.2s ease;
 }
+
 .add-btn:hover {
   opacity: 1;
+}
+.add-btn[disabled] {
+  cursor: not-allowed;
+  opacity: 0.6;         /* optional: make disabled look faded */
 }
 
 /* ---------- Responsive Layout ---------- */
