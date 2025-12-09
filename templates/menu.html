@@ -20,90 +20,29 @@
         </div>
     </section>
 
-    <!-- ---------- Menu Card Section ---------- -->
+    <!-- ---------- Menu Sections (Breakfast, Lunch, Drinks) ---------- -->
     <section class="menu-section" id="breakfast">
         <div class="container">
 
-            <!-- Menu card holds the Breakfast items -->
+            <!-- Breakfast Section -->
             <div class="menu-card">
                 <h2>Breakfast</h2>
-
-                <!------------ One menu item ------------>
-                <article class="menu-item">
-                    <div class="menu-thumb">
-                        <img src="../static/images/eggs.jpg" alt="Poached Eggs on Toast">
-                    </div>
-
-                    <div class="menu-info">
-                        <h3>Poached Eggs on Toast</h3>
-                        <p class="desc">Two free-range eggs, toasted sourdough, herbed butter.</p>
-
-                        <!-- Price and Add button on the same line -->
-                        <div class="menu-actions">
-                            <span class="price">$12.50</span>
-                            <button class="add-btn" disabled>Add</button>
-                        </div>
-                    </div>
-                </article>
-                <article class="menu-item">
-                    <div class="menu-thumb">
-                        <img src="../static/images/crepes.jpg" alt="Crepes with ice-cream">
-                    </div>
-
-                    <div class="menu-info">
-                        <h3>Crepes</h3>
-                        <p class="desc">Two large crepes, served with ice-cream and your choice of sauce.</p>
-
-                        <!-- Price and Add button on the same line -->
-                        <div class="menu-actions">
-                            <span class="price">$9.00</span>
-                            <button class="add-btn" disabled>Add</button>
-                        </div>
-                    </div>
-                </article>
-
+                <div id="menu-breakfast" class="menu-items"></div>
             </div>
 
-            <!-- Menu card holds the Breakfast items -->
+            <!-- Lunch Section -->
             <div class="menu-card">
                 <h2>Lunch</h2>
-
-                <!------------ One menu item ------------>
-                <article class="menu-item">
-                    <div class="menu-thumb">
-                        <img src="../static/images/caeser.jpg" alt="Caeser salad">
-                    </div>
-                    <div class="menu-info">
-                        <h3>Ceaser Salad</h3>
-                        <p class="desc">A delicous combination of fresh lettuce, croutons and dressing served with salmon.</p>
-
-                        <!-- Price and Add button on the same line -->
-                        <div class="menu-actions">
-                            <span class="price">$15.00</span>
-                            <button class="add-btn" disabled>Add</button>
-                        </div>
-                    </div>
-                </article>
-                <article class="menu-item">
-                    <div class="menu-thumb">
-                        <img src="../static/images/italian.jpg" alt="Italian sub sandwich">
-                    </div>
-
-                    <div class="menu-info">
-                        <h3>Italian Sub</h3>
-                        <p class="desc">A classic Italian sub with local salami and cheese, fresh lettuce, tomatoes, red onion and finished with pickles and house dressing.</p>
-
-                        <!-- Price and Add button on the same line -->
-                        <div class="menu-actions">
-                            <span class="price">$9.50</span>
-                            <button class="add-btn" disabled>Add</button>
-                        </div>
-                    </div>
-                </article>
-
+                <div id="menu-lunch" class="menu-items"></div>
             </div>
 
-        </div>
+            <!-- Drinks Section -->
+            <div class="menu-card">
+                <h2>Drinks</h2>
+                <div id="menu-drinks" class="menu-items"></div>
+            </div>
+
+        </div> <!-- end of .container -->
     </section>
 
     <!-- ---------- Footer Section ---------- -->
@@ -112,5 +51,6 @@
             © 2025 Café Finigan • <a href="#">Privacy</a>
         </div>
     </footer>
+    <script src="../static/menu.js"></script>
 </body>
 </html>
