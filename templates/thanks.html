@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cafe Finigan — Online Menu</title>
+    <title>Cafe Finigan — Online Cart</title>
     <meta name="description" content="Order the Café Finigan’s menu online in-advance. Browse the menu entire menu and pick-up your order at your chosen time.">
     <meta name="keywords" content="café, pre-order, Finigan, lunch, breakfast">
     <meta name="auther" content="Lance Speakman">
@@ -15,34 +15,21 @@
     <section class="menu-banner">
         <img src="../static/images/menu-banner.jpg" alt="Café Finigan Menu artwork">
         <div class="banner-text container">
-            <h1>Our Menu</h1>
+            <h1>Your Order</h1>
             <p class="lead">Freshly made and ready when you are.</p>
         </div>
     </section>
 
-    <!-- ---------- Menu Sections (Breakfast, Lunch, Drinks) ---------- -->
-    <section class="menu-section" id="breakfast">
+    <!-- ---------- Thank You Section ---------- -->
+    <section class="menu-section">
         <div class="container">
-
-            <!-- Breakfast Section -->
             <div class="menu-card">
-                <h2>Breakfast</h2>
-                <div id="menu-breakfast" class="menu-items"></div>
-            </div>
+            <h2>Thanks for your order!</h2>
+            <p id="thanks-message" class="note"></p>
 
-            <!-- Lunch Section -->
-            <div class="menu-card">
-                <h2>Lunch</h2>
-                <div id="menu-lunch" class="menu-items"></div>
+            <a href="menu.html" class="add-btn">Back to menu</a>
             </div>
-
-            <!-- Drinks Section -->
-            <div class="menu-card">
-                <h2>Drinks</h2>
-                <div id="menu-drinks" class="menu-items"></div>
-            </div>
-
-        </div> <!-- end of .container -->
+        </div>
     </section>
 
     <!-- ---------- Footer Section ---------- -->
@@ -51,6 +38,10 @@
             © 2025 Café Finigan • <a href="#">Privacy</a>
         </div>
     </footer>
-    <script src="../static/menu.js"></script>
+
+
+
+    <script src="../static/thanks.js"></script>
+
 </body>
 </html>

@@ -396,3 +396,82 @@ ul { margin: 0; padding: 0; }
   transform: scale(1.06);             /* enlarges image slightly on hover */
 }
 
+/*-------------- Order Table --------------*/
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.order-table th {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  font-size: 1.05rem;
+}
+
+.order-table th:nth-child(2),
+.order-table th:nth-child(3),
+.order-table th:nth-child(4) {
+  text-align: right;
+}
+
+.order-table td {
+  padding: 0.55rem 0.75rem;
+  font-size: 1.05rem;
+}
+
+.order-table td:nth-child(2),
+.order-table td:nth-child(3),
+.order-table td:nth-child(4) {
+  text-align: right;
+}
+
+.order-total {
+  font-size: 1.35rem;
+  margin-bottom: 1rem;
+}
+
+/*-------------- Order Form --------------*/
+.order-details-heading {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.order-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 2rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.order-form label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.05rem;
+}
+
+.order-form input {
+  padding: 0.45rem 0.55rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+/* Button centred under Total */
+.order-button-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.order-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+}

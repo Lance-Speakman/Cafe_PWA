@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe Finigan — Online Cart</title>
+    <meta name="description" content="Order the Café Finigan’s menu online in-advance. Browse the menu entire menu and pick-up your order at your chosen time.">
+    <meta name="keywords" content="café, pre-order, Finigan, lunch, breakfast">
+    <meta name="auther" content="Lance Speakman">
+    <link rel="icon" href="../static/images/logo.png" type="image/png">
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <!-- ---------- Menu Banner ---------- -->
+    <section class="menu-banner">
+        <img src="../static/images/menu-banner.jpg" alt="Café Finigan Menu artwork">
+        <div class="banner-text container">
+            <h1>Your Order</h1>
+            <p class="lead">Review your items before placing your order.</p>
+        </div>
+    </section>
+
+    <!-- ---------- Checkout Section ---------- -->
+    <section class="menu-section">
+        <div class="container">
+            <div class="menu-card">
+
+                <!-- Heading + form fields -->
+                <h3 class="order-details-heading">Enter your details:</h3>
+
+                <form id="order-form" class="order-form">
+
+                    <label>
+                        Name:
+                        <input type="text" id="customer-name" required>
+                    </label>
+
+                    <label>
+                        Email:
+                        <input type="email" id="customer-email" required>
+                    </label>
+
+                    <label>
+                        Pick-up time:
+                        <input type="time" id="pickup-time" required>
+                    </label>
+
+                </form>
+
+                <!-- Order summary table -->
+                <table class="order-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-rows">
+                    <!-- JavaScript will insert rows here -->
+                    </tbody>
+                </table>
+
+                <p class="order-total">
+                    <strong>Total:</strong>
+                    $<span id="order-total">0.00</span>
+                </p>
+
+                <!-- Button centred under Total -->
+                <div class="order-button-row">
+                    <button type="submit" form="order-form" class="add-btn order-button">
+                        Place order
+                    </button>
+                </div>
+
+                <p id="order-message" class="note"></p>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ---------- Footer Section ---------- -->
+    <footer class="site-footer">
+        <div class="container">
+            © 2025 Café Finigan • <a href="#">Privacy</a>
+        </div>
+    </footer>
+
+
+    <!-- Checkout script -->
+    <script src="../static/orders.js"></script>
+
+</body>
+</html>

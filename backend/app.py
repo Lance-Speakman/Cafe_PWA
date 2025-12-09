@@ -54,5 +54,54 @@ def get_menu():
 
     return jsonify({"menu": menu})
 
+# POST route: reuse ID or create new one
+@app.route('/orders', methods=['POST'])
+def create_order():
+    data = request.get_json()
+
+    customer_name  = data.get('customerName', 'Guest')
+    customer_email = data.get('customerEmail')
+    pickup_time    = data.get('pickupTime')
+    items          = data.get('items', [])
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    # Try to find an existing customer with this email
+    cur.execute("SELECT CustomerID FROM Customers WHERE Email = ?", (customer_email,))
+    row = cur.fetchone()
+
+    if row:
+        # Reuse existing customer
+        customer_id = row["CustomerID"]
+    else:
+        # Insert new customer
+        cur.execute(
+            "INSERT INTO Customers (CustomerName, Email) VALUES (?, ?)",
+            (customer_name, customer_email)
+        )
+        customer_id = cur.lastrowid
+
+    # Create the order record
+    cur.execute(
+        "INSERT INTO Orders (CustomerID, OrderDate) VALUES (?, ?)",
+        (customer_id, pickup_time)
+    )
+    order_id = cur.lastrowid
+
+    # Insert each item into the OrderItems table
+    for item in items:
+        cur.execute(
+            "INSERT INTO OrderItems (OrderID, MenuItemID, Qty) VALUES (?, ?, ?)",
+            (order_id, item["MenuItemID"], item.get("qty", 1))
+        )
+
+    conn.commit()
+    conn.close()
+
+    return jsonify({
+        "message": f"✅ Order received! Your order number is {order_id}."
+    })
+
 if __name__ == '__main__':
     app.run(debug=True, port=5050)
