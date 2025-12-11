@@ -2,7 +2,7 @@
   "name": "Café Finigan – Pre-order Lunch Online",
   "short_name": "Café Finigan",
   "id": "/cafe-finigan",
-  "start_url": "/templates/index.html",
+  "start_url": "/templates/main.html",
   "display": "standalone",
   "background_color": "#faf7f2",
   "theme_color": "#0e7c7b",
