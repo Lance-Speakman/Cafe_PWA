@@ -71,7 +71,7 @@ fetch("http://127.0.0.1:5050/menu")
             card.className = "menu-item";
             card.innerHTML = `
                 <div class="menu-thumb">
-                    <img src="../static/images/eggs.jpg" alt="${item.ItemName}">
+                    <img src="../static/images/${item.ItemName}.jpg" alt="${item.ItemName}">
                 </div>
                 <div class="menu-info">
                     <h3>${item.ItemName}</h3>
