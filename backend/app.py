@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from cryptography.fernet import Fernet
 import sqlite3  # Python library for working with SQLite databases
 import os       # Helps build file paths that work on all systems
 
@@ -24,6 +25,11 @@ def home():
 # POST route to receive data from the front-end
 @app.route('/feedback', methods=['POST'])
 def feedback():
+    key = request.headers.get("API-Key")
+
+    if key != API_KEY:
+        return jsonify({"error": "Unauthorized access"}), 403
+    
     data = request.get_json(force=True)  # JSON from fetch()
     message = (data or {}).get('message', '').strip()
     if not message:
@@ -35,6 +41,10 @@ def feedback():
 # Test route to read customers from the database
 @app.route('/customers')
 def get_customers():
+    key = request.headers.get("API-Key")
+
+    if key != API_KEY:
+        return jsonify({"error": "Unauthorized access"}), 403
     conn = get_db_connection()   # open database
     rows = conn.execute(
         'SELECT CustomerID, CustomerName, Email FROM Customers'
@@ -45,7 +55,7 @@ def get_customers():
 
 # GET route: return all menu items
 @app.route('/menu', methods=['GET'])
-def get_menu():
+def get_menu():    
     conn = get_db_connection()   # open database using the helper
     rows = conn.execute(
         'SELECT MenuItemID, ItemName, Category, Price FROM MenuItems'
@@ -70,6 +80,10 @@ def create_order():
     pickup_time    = data.get('pickupTime')
     items          = data.get('items', [])
 
+    #encrypted_email = cipher.encrypt(customer_email)
+    #encrypted_name = cipher.encrypt(customer_name)    # Placeholder for encryption logic
+    #print(encrypted_email, encrypted_name)  # Debug: print encrypted values
+    
     conn = get_db_connection()
     cur = conn.cursor()
 
