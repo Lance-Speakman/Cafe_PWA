@@ -62,20 +62,23 @@ form.addEventListener("submit", event => {
     const items = cart;
     showMessage("");
 
-    if (name.length >= 2) {
-        if(/^[A-Za-z]+$/.test(name)){
-            if (email.includes("@") && email.length >= 5) {
-                if (items.length > 0) {
-                    const orderData = {
-                        customerName: nameInput.value.trim(),
-                        customerEmail: emailInput.value.trim(),
-                        pickupTime: timeInput.value,
-                        items: cart
-                    };
-                } else{showMessage("Please ensure there are items in your cart to order.")}
-            } else {showMessage("Please enter a valid email address, must contain '@'.")}
-        } else {showMessage("Please enter a valid name, only alpha characters accepted.")}
-    } else {showMessage("Please enter a valid name, only alpha characters accepted.")}
+    if (name.length <= 2 || !/^[A-Za-z]+$/.test(name)) {
+        return showMessage("Please enter a valid name (letters only).");
+    }
+
+    if (!email.includes("@") || email.length <= 5) {
+        return showMessage("Please enter a valid email address.");
+    }
+
+    if (items.length === 0) {
+        return showMessage("Your cart is empty.");
+    }
+    const orderData = {
+        customerName: name,
+        customerEmail: email,
+        pickupTime: pickupTime,
+        items: items
+    };
     
     fetch("http://127.0.0.1:5050/orders", {
         method: "POST",
