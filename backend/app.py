@@ -6,6 +6,8 @@ import os       # Helps build file paths that work on all systems
 app = Flask(__name__)
 CORS(app)  # allow requests from your local front-end
 
+API_KEY = "test321" #for demo purposes 
+
 # Opens a connection to orders.db inside the backend folder.
 def get_db_connection():
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # backend folder
@@ -57,6 +59,10 @@ def get_menu():
 # POST route: reuse ID or create new one
 @app.route('/orders', methods=['POST'])
 def create_order():
+    key = request.headers.get("API-Key")
+
+    if key != API_KEY:
+        return jsonify({"error": "Unauthorized access"}), 403
     data = request.get_json()
 
     customer_name  = data.get('customerName', 'Guest')

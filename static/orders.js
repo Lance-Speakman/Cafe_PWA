@@ -18,7 +18,12 @@ const form       = document.getElementById("order-form");
 const nameInput  = document.getElementById("customer-name");
 const emailInput = document.getElementById("customer-email");
 const timeInput  = document.getElementById("pickup-time");
+const messageBox = document.getElementById("formMessage");
 
+function showMessage(message, color = "red") {
+    messageBox.textContent = message;
+    messageBox.style.color = color;
+}
 // Load cart and display it
 const cart = loadCart();
 
@@ -50,16 +55,32 @@ if (!cart || cart.length === 0) {
 form.addEventListener("submit", event => {
     event.preventDefault();  // stop page reload
 
-    const orderData = {
-        customerName: nameInput.value.trim(),
-        customerEmail: emailInput.value.trim(),
-        pickupTime: timeInput.value,
-        items: cart
-    };
+    
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const pickupTime = timeInput.value;
+    const items = cart;
+    showMessage("");
 
+    if (name.length >= 2) {
+        if(/^[A-Za-z]+$/.test(name)){
+            if (email.includes("@") && email.length >= 5) {
+                if (items.length > 0) {
+                    const orderData = {
+                        customerName: nameInput.value.trim(),
+                        customerEmail: emailInput.value.trim(),
+                        pickupTime: timeInput.value,
+                        items: cart
+                    };
+                } else{showMessage("Please ensure there are items in your cart to order.")}
+            } else {showMessage("Please enter a valid email address, must contain '@'.")}
+        } else {showMessage("Please enter a valid name, only alpha characters accepted.")}
+    } else {showMessage("Please enter a valid name, only alpha characters accepted.")}
+    
     fetch("http://127.0.0.1:5050/orders", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+                    "API-Key": "test321"},
         body: JSON.stringify(orderData)
     })
     .then(res => res.json())
@@ -72,7 +93,7 @@ form.addEventListener("submit", event => {
         clearCart();
 
         // Redirect to Thank-You page
-        window.location.href = "/templates/thanks.html";
+        window.location.href = "thanks.html";
     })
     .catch(() => {
         messageP.textContent = "Could not place order. Is Flask running?";
