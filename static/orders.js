@@ -1,4 +1,5 @@
 // ---------- Checkout Page Logic ----------
+console.log("orders.js loaded");
 const CART_KEY = "cafeFiniganCart";
 
 function loadCart() {
@@ -62,7 +63,7 @@ form.addEventListener("submit", event => {
     const items = cart;
     showMessage("");
 
-    if (name.length <= 2 || !/^[A-Za-z]+$/.test(name)) {
+    if (name.length < 2 || !/^[A-Za-z]+$/.test(name)) {
         return showMessage("Please enter a valid name (letters only).");
     }
 
@@ -80,13 +81,18 @@ form.addEventListener("submit", event => {
         items: items
     };
     
-    fetch("http://127.0.0.1:5050/orders", {
+    fetch("http://127.0.0.1:5050/API/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json",
                     "API-Key": "test321"},
         body: JSON.stringify(orderData)
     })
-    .then(res => res.json())
+    .then(res => {
+        if (!res.ok) {
+            throw new Error("Server error");
+        }
+        return res.json();
+    })
     .then(data => {
         // Store name + time so the Thank-You page can read them
         localStorage.setItem("lastOrderName", nameInput.value.trim());
@@ -96,7 +102,7 @@ form.addEventListener("submit", event => {
         clearCart();
 
         // Redirect to Thank-You page
-        window.location.href = "thanks.html";
+        window.location.href = "./thanks.html";
     })
     .catch(() => {
         messageP.textContent = "Could not place order. Is Flask running?";

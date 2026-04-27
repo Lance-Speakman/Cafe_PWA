@@ -17,7 +17,9 @@
 
             <!-- ---------- Brand Section (Logo + Name) ---------- -->
             <div class="brand">
-                <img src="../static/images/logo.png" alt="Café Finigan logo" class="logo">
+                <a href="main.html">
+                    <img src="../static/images/logo.png" alt="Café Finigan logo" class="logo">
+                </a>
                 <span class="brand-name">Café Finigan</span>
             </div>
 
@@ -82,6 +84,64 @@
 
     <!-- ---------- Footer Section ---------- -->
     <footer class="site-footer">
+
+        <form id="admin-login" class="admin-login">
+            <label>
+                Email:
+                <input id="email-input" required>
+            </label>
+            <label>
+                Password:
+                <input type="password" id="admin-password" required>
+            </label>
+            <button type="submit" class="add-btn order-button">
+                        Log in
+            </button>
+
+            <p id="login-response"></p>
+        </form>
+    
+    
+        <script>
+            const adminForm = document.getElementById("admin-login");
+            const emailInput = document.getElementById("email-input");
+            const passwordInput = document.getElementById("admin-password");
+            const loginResponse = document.getElementById("login-response");
+
+            adminForm.addEventListener("submit", function(event) {
+                event.preventDefault();
+
+                const email = emailInput.value.trim();
+                const password = passwordInput.value;
+        
+                fetch("http://127.0.0.1:5050/login", {
+                    method: "POST",
+                    credentials: "include",
+                    headers: { "Content-Type": "application/json",
+                        "API-Key": "test321"},
+                    body: JSON.stringify(
+                        { email, password }
+                    )
+                })
+        
+                .then(res => res.json())
+                .then(data => {
+                    if (data.message = "Login successful") {
+                        loginResponse.textContent = data.message;
+                        if (data.message === "Login successful") {
+                            window.location.href = "admin.html";
+                        }           
+                    } else {
+                        loginResponse.textContent = data.error;
+                    }        
+                })
+                .catch(() => {            
+                    loginResponse.textContent = "Could not connect to server.";        
+                });
+            });
+        </script>
+
+
         <div class="container">
             © 2025 Café Finigan • <a href="privacy.html">Privacy</a>
         </div>

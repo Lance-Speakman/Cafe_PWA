@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS Customers (
     CustomerID INTEGER PRIMARY KEY AUTOINCREMENT,
     CustomerName TEXT NOT NULL,
-    Email TEXT
+    Email TEXT NOT NULL,
 );
 
 -- What the café actually sells
@@ -10,6 +10,12 @@ CREATE TABLE IF NOT EXISTS MenuItems (
     ItemName   TEXT NOT NULL,
     Category   TEXT NOT NULL,   -- e.g. 'Breakfast', 'Drink', 'Snack', 'Lunch'
     Price      REAL NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS UserLogins (
+    loginID INTEGER PRIMARY KEY AUTOINCREMENT,
+    UserEmail TEXT UNIQUE NOT NULL,
+    Password TEXT NOT NULL
 );
 
 -- One order per purchase (linked to a customer)

@@ -335,6 +335,13 @@ ul { margin: 0; padding: 0; }
   color: #464E47;
 }
 
+#admin-links a {
+  display: block;
+  padding: 10px 0;
+  text-decoration: none;
+  font-size: 18px;
+  }
+
 /* ---------- Price and Add Button ---------- */
 .menu-actions {
   display: flex;

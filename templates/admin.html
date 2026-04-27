@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cafe Finigan — Online Cart</title>
+    <title>Cafe Finigan — Online Menu</title>
     <meta name="description" content="Order the Café Finigan’s menu online in-advance. Browse the menu entire menu and pick-up your order at your chosen time.">
     <meta name="keywords" content="café, pre-order, Finigan, lunch, breakfast">
     <meta name="auther" content="Lance Speakman">
@@ -35,50 +35,37 @@
             </nav>
         </div>
     </header>
-    <!-- ---------- Menu Banner ---------- -->
-    <section class="menu-banner">
-        <img src="../static/images/menu-banner.jpg" alt="Café Finigan Menu artwork">
-        <div class="banner-text container">
-            <h1>Your Order</h1>
-            <p class="lead">Freshly made and ready when you are.</p>
-        </div>
+    <section>
+        <div id="admin-links"></div>
+        <p id="message"></p>
+
+        <script>
+            fetch("http://127.0.0.1:5050/admin-links", {
+                credentials: "include"
+            })
+            .then(res => res.json())
+            .then(data => {
+                const container = document.getElementById("admin-links");
+                const message = document.getElementById("message");
+
+                if (data.links.length > 0) {
+                    data.links.forEach(link => {
+                        const a = document.createElement("a");
+                        a.href = link.url;
+                        a.textContent = link.name;
+                        container.appendChild(a);
+                    });
+                } else {
+                    message.textContent = "You do not have admin access.";
+                }
+            })
+            .catch(err => {
+                console.error("Error loading admin links:", err);
+                document.getElementById("message").textContent =
+                    "Could not load admin dashboard.";
+            });
+        </script>
     </section>
-
-    <!-- ---------- Thank You Section ---------- -->
-    <section class="menu-section">
-        <div class="container">
-            <div class="menu-card">
-            <h2>Thanks for your order!</h2>
-            <p id="thanks-message" class="note"></p>
-
-            <a href="menu.html" class="add-btn">Back to menu</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ---------- Footer Section ---------- -->
-    <footer class="site-footer">
-        <div class="container">
-            © 2025 Café Finigan • <a href="privacy.html">Privacy</a>
-        </div>
-    </footer>
-
-
-
-    <script src="../static/thanks.js"></script>
-
-    <script>
-    // Register the service worker so the PWA can work offline
-    if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("../service-worker.js")
-        .then(registration => {
-            console.log("Service worker registered with scope:", registration.scope);
-        })
-        .catch(error => {
-            console.error("Service worker registration failed:", error);
-        });
-    }
-    </script>
     
 </body>
 </html>
